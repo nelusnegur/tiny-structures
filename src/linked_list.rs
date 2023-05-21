@@ -112,10 +112,7 @@ impl<T> LinkedList<T> {
 
 impl<T> Drop for LinkedList<T> {
     fn drop(&mut self) {
-        while let Some(node) = self.head {
-            let node = unsafe { Box::from_raw(node.as_ptr()) };
-            self.head = node.next;
-        }
+        while self.pop_front().is_some() {}
     }
 }
 
